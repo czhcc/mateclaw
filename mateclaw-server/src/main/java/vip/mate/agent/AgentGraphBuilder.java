@@ -158,6 +158,12 @@ public class AgentGraphBuilder {
     private final vip.mate.llm.chatmodel.DashScopeChatModelBuilder dashScopeBuilder;
     private final vip.mate.llm.routing.MultimodalRouter multimodalRouter;
     private final vip.mate.llm.routing.MediaCaptionService mediaCaptionService;
+    private vip.mate.workspace.core.service.ChatUploadLocationResolver chatUploadLocationResolver;
+
+    @Autowired
+    public void setChatUploadLocationResolver(vip.mate.workspace.core.service.ChatUploadLocationResolver resolver) {
+        this.chatUploadLocationResolver = resolver;
+    }
     private final vip.mate.goal.service.GoalService goalService;
     private final vip.mate.goal.service.GoalEvaluationService goalEvaluationService;
     private final vip.mate.goal.service.GoalFollowupService goalFollowupService;
@@ -541,6 +547,7 @@ public class AgentGraphBuilder {
         agent.goalService = goalService;
         agent.multimodalRouter = multimodalRouter;
         agent.mediaCaptionService = mediaCaptionService;
+        agent.chatUploadLocationResolver = chatUploadLocationResolver;
         agent.userLocale = resolveLocale();
         agent.temperature = runtimeModel.getTemperature();
         agent.maxTokens = runtimeModel.getMaxTokens();
